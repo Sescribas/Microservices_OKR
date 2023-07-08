@@ -1,36 +1,65 @@
 using Microsoft.AspNetCore.Mvc;
 using Domain;
 using Identity.api.Models;
+using Identity.Services.Interfaces;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using System.ComponentModel;
 
 namespace Identity.api.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class UserController : ControllerBase
     {
-        private static readonly List<User> Users = new List<User>
-        {
-            new User
-            {
-                Id=1,
-                UserName = "Sescribas",
-                Email = "santi.escribas@hotmail.com",
-                Dni = "39966396"
-            }
-        };
+        private readonly IUserService _userService;
 
         private readonly ILogger<UserController> _logger;
 
-        public UserController(ILogger<UserController> logger)
+        public UserController(ILogger<UserController> logger, IUserService userService)
         {
             _logger = logger;
+            _userService = userService;
         }
 
-        [HttpGet(Name = "GetUsers")]
+        [HttpGet("Get")]
+        [Description("Obtiene un listado de usuarios.")]
         public IEnumerable<User> Get()
         {
             _logger.LogInformation("Se comenzo el pedido de usuarios.");
-            return Users;
+            var users = _userService.GetUsers();
+            
+            return users;
         }
+
+        [HttpGet("GetById")]
+        [Description("Obtiene un usuario por id.")]
+        public IEnumerable<User> GetUserById()
+        {
+            _logger.LogInformation("Se comenzo el pedido de usuarios.");
+            return null;
+        }
+
+        [HttpPost("Create")]
+        [Description("Create an User")]
+        public Task<IActionResult> Create()
+        {
+            return null;
+        }
+
+        [HttpPut("Update")]
+        [Description("Update an User")]
+
+        public Task<IActionResult> Update()
+        {
+            return null;
+        }
+
+        [HttpDelete("Delete")]
+        [Description("Delete an User")]
+        public Task<IActionResult> Delete()
+        {
+            return null;
+        }
+
     }
 }
