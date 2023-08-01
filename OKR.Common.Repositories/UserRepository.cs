@@ -18,5 +18,10 @@ namespace OKR.Common.Repositories
         {
             return _context.Users.ToList();
         }
+
+        public void Create(User user)
+        {
+            _context.Users.Add(user);
+        }
     }
 }

@@ -4,7 +4,11 @@ using Identity.api.Models;
 using Identity.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using System.ComponentModel;
-
+using System.Net.Mime;
+using Swashbuckle.AspNetCore.Annotations;
+using Identity.api.Models.ViewModels;
+using MediatR;
+using Identitty.Services.EventHandlers.Commands;
 namespace Identity.api.Controllers
 {
     [ApiController]
@@ -12,20 +16,18 @@ namespace Identity.api.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserService _userService;
+        private readonly IMediator _mediator;
 
-        private readonly ILogger<UserController> _logger;
-
-        public UserController(ILogger<UserController> logger, IUserService userService)
+        public UserController( IUserService userService, IMediator mediator)
         {
-            _logger = logger;
             _userService = userService;
+            _mediator = mediator;
         }
 
         [HttpGet("Get")]
         [Description("Obtiene un listado de usuarios.")]
         public IEnumerable<User> Get()
         {
-            _logger.LogInformation("Se comenzo el pedido de usuarios.");
             var users = _userService.GetUsers();
             
             return users;
@@ -35,15 +37,18 @@ namespace Identity.api.Controllers
         [Description("Obtiene un usuario por id.")]
         public IEnumerable<User> GetUserById()
         {
-            _logger.LogInformation("Se comenzo el pedido de usuarios.");
             return null;
         }
 
-        [HttpPost("Create")]
-        [Description("Create an User")]
-        public Task<IActionResult> Create()
+        [HttpPost("Create User")]
+        [SwaggerOperation(Summary = "Crea un nuevo usuario.", Tags = new[] { "User" })]
+        [ProducesResponseType(typeof(UserCreateCommand), StatusCodes.Status201Created)]
+        [Produces(MediaTypeNames.Application.Json, "application/problem+json")]
+        public async Task<IActionResult> Create([FromBody] UserCreateCommand command)
         {
-            return null;
+            var result =  await _mediator.Send(command);
+
+            return result.Success ? Ok() : BadRequest(result);
         }
 
         [HttpPut("Update")]

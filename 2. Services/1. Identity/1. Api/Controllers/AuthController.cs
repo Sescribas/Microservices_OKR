@@ -1,5 +1,5 @@
 ﻿using Identity.api.Models;
-using Identity.api.Models.DtoS;
+using Identity.api.Models.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -24,7 +24,7 @@ namespace Identity.api.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<ActionResult<UserModel>> Register(UserDto request) 
+        public async Task<ActionResult<UserModel>> Register(UserViewModel request) 
         {
             _logger.LogInformation("Comienza la operacion de registracion.");
 
@@ -39,7 +39,7 @@ namespace Identity.api.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult<string>> Login(UserDto request)
+        public async Task<ActionResult<string>> Login(UserViewModel request)
         {
             if(User.UserName != request.UserName)
             {

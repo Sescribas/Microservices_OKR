@@ -18,5 +18,10 @@ namespace Identity.Services
             var users = _userRepository.GetUsers();
             return users;
         }
+
+        public void Create(User user)
+        {
+            _userRepository.Create(user);
+        }
     }
 }
