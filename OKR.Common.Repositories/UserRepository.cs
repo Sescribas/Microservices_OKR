@@ -1,5 +1,5 @@
 ﻿using Data;
-using Domain;
+using OKR.Common.Domain;
 using OKR.Common.Repositories.Interfaces;
 
 namespace OKR.Common.Repositories

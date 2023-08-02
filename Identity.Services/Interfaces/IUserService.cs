@@ -1,6 +1,6 @@
-﻿using Domain;
+﻿using OKR.Common.Domain;
 
-namespace Identity.Services.Interfaces
+namespace OKR.Common.Services.Interfaces
 {
     public interface IUserService
     {

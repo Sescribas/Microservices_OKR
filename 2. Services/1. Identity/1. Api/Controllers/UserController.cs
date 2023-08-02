@@ -1,17 +1,17 @@
 using Microsoft.AspNetCore.Mvc;
-using Domain;
-using Identity.api.Models;
-using Identity.Services.Interfaces;
+using OKR.Common.Domain;
+using OKR.Common.api.Models;
+using OKR.Common.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using System.ComponentModel;
 using System.Net.Mime;
 using Swashbuckle.AspNetCore.Annotations;
-using Identity.api.Models.ViewModels;
+using OKR.Common.api.Models.ViewModels;
 using MediatR;
 using Identitty.Services.EventHandlers.Commands;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
-namespace Identity.api.Controllers
+namespace OKR.Common.api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]

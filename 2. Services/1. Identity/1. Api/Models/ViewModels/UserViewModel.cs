@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Identity.api.Models.ViewModels
+namespace OKR.Common.api.Models.ViewModels
 {
     public class UserViewModel
     {

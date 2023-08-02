@@ -1,4 +1,4 @@
-﻿using Domain;
+﻿using OKR.Common.Domain;
 
 namespace OKR.Common.Repositories.Interfaces
 {

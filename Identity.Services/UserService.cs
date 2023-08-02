@@ -1,8 +1,8 @@
-﻿using Domain;
-using Identity.Services.Interfaces;
+﻿using OKR.Common.Domain;
+using OKR.Common.Services.Interfaces;
 using OKR.Common.Repositories.Interfaces;
 
-namespace Identity.Services
+namespace OKR.Common.Services
 {
     public class UserService : IUserService
     {

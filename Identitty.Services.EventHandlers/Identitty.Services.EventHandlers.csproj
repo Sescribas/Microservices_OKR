@@ -13,7 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ApplicationErrorException\ApplicationErrorException.csproj" />
-    <ProjectReference Include="..\Identity.Services\Identity.Services.csproj" />
+    <ProjectReference Include="..\Identity.Services\OKR.Common.Services.csproj" />
     <ProjectReference Include="..\OKR.Common.Results\OKR.Common.Results.csproj" />
   </ItemGroup>
 

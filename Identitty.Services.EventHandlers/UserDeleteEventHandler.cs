@@ -1,7 +1,7 @@
 ﻿using ApplicationErrorException;
-using Domain;
+using OKR.Common.Domain;
 using Identitty.Services.EventHandlers.Commands;
-using Identity.Services.Interfaces;
+using OKR.Common.Services.Interfaces;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using OKR.Common.Results;

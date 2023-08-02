@@ -1,4 +1,4 @@
-﻿namespace Identity.api.Models
+﻿namespace OKR.Common.api.Models
 {
     public class UserModel
     {

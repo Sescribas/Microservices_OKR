@@ -1,5 +1,5 @@
-﻿using Identity.api.Models;
-using Identity.api.Models.ViewModels;
+﻿using OKR.Common.api.Models;
+using OKR.Common.api.Models.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -7,7 +7,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
 
-namespace Identity.api.Controllers
+namespace OKR.Common.api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

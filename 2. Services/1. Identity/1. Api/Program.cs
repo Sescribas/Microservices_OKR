@@ -1,6 +1,6 @@
 using Data;
-using Identity.Services.Interfaces;
-using Identity.Services;
+using OKR.Common.Services.Interfaces;
+using OKR.Common.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;

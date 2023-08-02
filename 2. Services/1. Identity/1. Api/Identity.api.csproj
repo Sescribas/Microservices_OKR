@@ -23,7 +23,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\Data\OKR.Common.Persistence.Database.csproj" />
     <ProjectReference Include="..\..\..\Identitty.Services.EventHandlers\Identitty.Services.EventHandlers.csproj" />
-    <ProjectReference Include="..\..\..\Identity.Services\Identity.Services.csproj" />
+    <ProjectReference Include="..\..\..\Identity.Services\OKR.Common.Services.csproj" />
     <ProjectReference Include="..\4. Domain\Domain\OKR.Common.Domain.csproj" />
   </ItemGroup>
 

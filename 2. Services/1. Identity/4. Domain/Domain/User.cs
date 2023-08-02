@@ -1,4 +1,4 @@
-﻿namespace Domain
+﻿namespace OKR.Common.Domain
 {
     public class User
     {
