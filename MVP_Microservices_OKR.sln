@@ -33,11 +33,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Identity.Services", "Identi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OKR.Common.Repositories", "OKR.Common.Repositories\OKR.Common.Repositories.csproj", "{9F0C4E28-B3F9-44F2-86AF-578BE4E0AA0A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Identitty.Services.EventHandlers", "Identitty.Services.EventHandlers\Identitty.Services.EventHandlers.csproj", "{82C9D139-52D7-427A-BA90-FE58AAF68185}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Identitty.Services.EventHandlers", "Identitty.Services.EventHandlers\Identitty.Services.EventHandlers.csproj", "{82C9D139-52D7-427A-BA90-FE58AAF68185}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Results", "3. Results", "{10B80378-B4D3-4DD9-8219-C22A2308ED67}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OKR.Common.Results", "OKR.Common.Results\OKR.Common.Results.csproj", "{DF51B7F7-7978-446F-8FC4-3B11CC1E1375}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OKR.Common.Results", "OKR.Common.Results\OKR.Common.Results.csproj", "{DF51B7F7-7978-446F-8FC4-3B11CC1E1375}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. Exceptions", "4. Exceptions", "{951ADDF8-DD76-4023-ABB0-234B693865C5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApplicationErrorException", "ApplicationErrorException\ApplicationErrorException.csproj", "{7BF169D6-A1CE-4F75-ABDA-A626CA5FAC21}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -73,6 +77,10 @@ Global
 		{DF51B7F7-7978-446F-8FC4-3B11CC1E1375}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DF51B7F7-7978-446F-8FC4-3B11CC1E1375}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DF51B7F7-7978-446F-8FC4-3B11CC1E1375}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7BF169D6-A1CE-4F75-ABDA-A626CA5FAC21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BF169D6-A1CE-4F75-ABDA-A626CA5FAC21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BF169D6-A1CE-4F75-ABDA-A626CA5FAC21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BF169D6-A1CE-4F75-ABDA-A626CA5FAC21}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -93,6 +101,8 @@ Global
 		{82C9D139-52D7-427A-BA90-FE58AAF68185} = {1DECC146-2B53-4B76-9D76-E518317A0D8E}
 		{10B80378-B4D3-4DD9-8219-C22A2308ED67} = {A36DD189-C5E5-43F6-9C40-B55AAF472D5C}
 		{DF51B7F7-7978-446F-8FC4-3B11CC1E1375} = {10B80378-B4D3-4DD9-8219-C22A2308ED67}
+		{951ADDF8-DD76-4023-ABB0-234B693865C5} = {A36DD189-C5E5-43F6-9C40-B55AAF472D5C}
+		{7BF169D6-A1CE-4F75-ABDA-A626CA5FAC21} = {951ADDF8-DD76-4023-ABB0-234B693865C5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {134D21C2-7228-41BF-AC15-E38D8F4FDABB}

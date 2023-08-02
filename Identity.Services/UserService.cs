@@ -19,9 +19,35 @@ namespace Identity.Services
             return users;
         }
 
+        public User? GetById(int id)
+        {
+            var user = _userRepository.GetById(id);
+            return user;
+        }
+
         public void Create(User user)
         {
-            _userRepository.Create(user);
+           _userRepository.Create(user);
+        }
+
+        public void Update(User user)
+        {
+            _userRepository.Update(user);
+        }
+
+        public bool VerifyUserName(string userName)
+        {
+            return _userRepository.VerifyByUserName(userName);
+        }
+
+        public bool VerifyEmail(string email)
+        {
+            return _userRepository.VerifyByEmail(email);
+        }
+
+        public void Delete(User user)
+        {
+            _userRepository.Delete(user);
         }
     }
 }

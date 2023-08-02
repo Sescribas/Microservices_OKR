@@ -9,6 +9,8 @@ using Swashbuckle.AspNetCore.Annotations;
 using Identity.api.Models.ViewModels;
 using MediatR;
 using Identitty.Services.EventHandlers.Commands;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+
 namespace Identity.api.Controllers
 {
     [ApiController]
@@ -24,7 +26,7 @@ namespace Identity.api.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet("Get")]
+        [HttpGet("getall")]
         [Description("Obtiene un listado de usuarios.")]
         public IEnumerable<User> Get()
         {
@@ -33,14 +35,7 @@ namespace Identity.api.Controllers
             return users;
         }
 
-        [HttpGet("GetById")]
-        [Description("Obtiene un usuario por id.")]
-        public IEnumerable<User> GetUserById()
-        {
-            return null;
-        }
-
-        [HttpPost("Create User")]
+        [HttpPost("create")]
         [SwaggerOperation(Summary = "Crea un nuevo usuario.", Tags = new[] { "User" })]
         [ProducesResponseType(typeof(UserCreateCommand), StatusCodes.Status201Created)]
         [Produces(MediaTypeNames.Application.Json, "application/problem+json")]
@@ -51,19 +46,26 @@ namespace Identity.api.Controllers
             return result.Success ? Ok() : BadRequest(result);
         }
 
-        [HttpPut("Update")]
-        [Description("Update an User")]
-
-        public Task<IActionResult> Update()
+        [HttpPut("update/{user_id}")]
+        [SwaggerOperation(Summary = "Se modifica un usuario.", Tags = new[] { "User" })]
+        [ProducesResponseType(typeof(UserUpdateCommand), StatusCodes.Status201Created)]
+        [Produces(MediaTypeNames.Application.Json, "application/problem+json")]
+        public async Task<IActionResult> Update([FromBody] UserUpdateCommand command, [FromRoute(Name = "user_id")] int userId)
         {
-            return null;
+            command.Id = userId;
+            var result = await _mediator.Send(command);
+
+            return result.Success ? Ok() : BadRequest(result);
         }
 
-        [HttpDelete("Delete")]
-        [Description("Delete an User")]
-        public Task<IActionResult> Delete()
+        [HttpDelete("delete/{user_id}")]
+        [SwaggerOperation(Summary = "Se elimina un usuario.", Tags = new[] { "User" })]
+        [Produces(MediaTypeNames.Application.Json, "application/problem+json")]
+        public async Task<IActionResult> Delete([FromRoute(Name = "user_id")] int userId)
         {
-            return null;
+            var result = await _mediator.Send(new UserDeleteCommand(userId));
+
+            return result.Success ? Ok() : BadRequest(result);
         }
 
     }

@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using ApplicationErrorException;
 
 namespace Identitty.Services.EventHandlers
 {
@@ -27,9 +28,53 @@ namespace Identitty.Services.EventHandlers
         public async Task<BaseResult<string>> Handle(UserCreateCommand request, CancellationToken cancellationToken)
         {
             _logger.LogInformation("Creando usuario - {Request}", JsonSerializer.Serialize(request));
+            try
+            {
+
+                User userToCreate = MapUser(request);
+
+                ValidateUserName(request);
+
+                ValidateEmail(request);
+
+            
+                _userService.Create(userToCreate);
+            }
+            catch (ApplicationErrorExceptions ex)
+            {
+                _logger.LogError(ex.Message, JsonSerializer.Serialize(request));
+
+                throw new ApplicationErrorExceptions("Hubo un error al crear el usuario.", (int)ErrorDictionary.GeneralCodes.UnexpectedError);
+
+            }
+
+            return new BaseResult<string> { Success = true };
+
+        }
 
 
-            User userToCreate = new User
+        private void ValidateUserName(UserCreateCommand request)
+        {
+            var exist = _userService.VerifyUserName(request.UserName.ToLower());
+            if (!exist) return;
+
+            _logger.LogError("Username ya existente: {Request}", JsonSerializer.Serialize(request));
+            throw new ApplicationErrorExceptions("Usuario ya existente", (int)ErrorDictionary.GeneralCodes.ModelStateInvalid);
+        }
+
+        private void ValidateEmail(UserCreateCommand request)
+        {
+            var exist = _userService.VerifyEmail(request.Email.ToLower());
+
+            if (!exist) return;
+
+            _logger.LogError("Email: ya existente: {Request}", JsonSerializer.Serialize(request));
+            throw new ApplicationErrorExceptions("Email ya existente", (int)ErrorDictionary.GeneralCodes.ModelStateInvalid);
+        }
+
+        private User MapUser(UserCreateCommand request)
+        {
+            return new User
             {
                 UserName = request.UserName,
                 Password = request.Password,
@@ -37,38 +82,8 @@ namespace Identitty.Services.EventHandlers
                 LastName = request.LastName,
                 Dni = request.Dni,
                 Email = request.Email
-            }; 
-
-            _userService.Create(userToCreate);
-            //ValidateUserName(request);
-
-            //ValidateEmail(request);
-
-
-            return new BaseResult<string> { Success = true };
-
-
+            };
         }
 
-
-        //private void ValidateUserName(UserCreateCommand request)
-        //{
-        //    var exist = _userService.Users.Any(x => x.UserName.ToLower() == request.UserName.ToLower());
-
-        //    if (!exist) return;
-
-        //    _logger.LogError("Username ya existente: {Request}", JsonSerializer.Serialize(request));
-        //    throw new ApplicationErrorException("Usuario ya existente", (int)GeneralCodes.ModelStateInvalid);
-        //}
-
-        //private void ValidateEmail(UserCreateCommand request)
-        //{
-        //    var exist = _userService.Users.Any(x => x.Email.ToLower() == request.Email.ToLower());
-
-        //    if (!exist) return;
-
-        //    _logger.LogError("Email: ya existente: {Request}", JsonSerializer.Serialize(request));
-        //    throw new ApplicationErrorException("Email ya existente", (int)GeneralCodes.ModelStateInvalid);
-        //}
     }
 }

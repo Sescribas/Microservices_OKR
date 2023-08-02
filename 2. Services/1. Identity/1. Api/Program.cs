@@ -6,6 +6,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using OKR.Common.Repositories.Interfaces;
 using OKR.Common.Repositories;
+using Microsoft.AspNetCore.Hosting;
+using System.Reflection;
+using Microsoft.Extensions.DependencyInjection;
+using MediatR;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +31,7 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<ApplicationDBContext>(x => x.UseSqlServer(connectionString));
 builder.Services.AddTransient<IUserRepository, UserRepository>();
 builder.Services.AddTransient<IUserService, UserService>();
+builder.Services.AddMediatR(Assembly.Load("Identitty.Services.EventHandlers"));
 
 var app = builder.Build();
 
