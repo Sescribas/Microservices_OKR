@@ -1,6 +1,7 @@
 ﻿using OKR.Common.Domain;
 using OKR.Common.Services.Interfaces;
 using OKR.Common.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace OKR.Common.Services
 {
@@ -33,21 +34,25 @@ namespace OKR.Common.Services
         public void Update(User user)
         {
             _userRepository.Update(user);
-        }
-
-        public bool VerifyUserName(string userName)
-        {
-            return _userRepository.VerifyByUserName(userName);
-        }
-
-        public bool VerifyEmail(string email)
-        {
-            return _userRepository.VerifyByEmail(email);
-        }
+        }       
 
         public void Delete(User user)
         {
             _userRepository.Delete(user);
+        }
+
+        public bool VerifyByUserName(string username)
+        {
+            var users = _userRepository.GetUsers();
+
+            return users.Any(x => x.UserName.ToLower() == username);
+        }
+
+        public bool VerifyByEmail(string email)
+        {
+            var users = _userRepository.GetUsers();
+
+            return users.Any(x => x.Email.ToLower() == email);
         }
     }
 }

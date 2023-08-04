@@ -8,8 +8,8 @@ namespace OKR.Common.Services.Interfaces
         User? GetById(int id);
         void Create(User user);
         void Update(User user);
-        bool VerifyUserName(string v);
-        bool VerifyEmail(string v);
         void Delete(User user);
+        bool VerifyByUserName(string username);
+        bool VerifyByEmail(string email);
     }
 }

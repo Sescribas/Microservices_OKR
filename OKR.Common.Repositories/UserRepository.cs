@@ -25,7 +25,7 @@ namespace OKR.Common.Repositories
 
         public void Create(User user)
         {
-            _context.Users.AddAsync(user);
+            _context.Users.Add(user);
             _context.SaveChanges();
         }
 
@@ -33,17 +33,7 @@ namespace OKR.Common.Repositories
         {
             _context.Users.Update(user);
             _context.SaveChanges();
-        }
-
-        public bool VerifyByUserName(string username)
-        {
-            return _context.Users.Any(x => x.UserName.ToLower() == username);
-        }
-
-        public bool VerifyByEmail(string email)
-        {
-            return _context.Users.Any(x => x.Email.ToLower() == email);
-        }
+        }       
 
         public void Delete(User user)
         {

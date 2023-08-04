@@ -5,7 +5,7 @@ VisualStudioVersion = 17.6.33801.468
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Client", "1. Client", "{DFEDFB4B-E33E-41AB-A632-7A8B33039FEC}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Services", "2. Services", "{8FA646E8-C5BA-4572-8665-51691B3AA274}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Apis", "2. Apis", "{8FA646E8-C5BA-4572-8665-51691B3AA274}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Identiy", "1. Identiy", "{6D6BD629-EA41-444A-A262-B927D83A81BF}"
 EndProject
@@ -13,9 +13,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Product", "2. Product", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Api", "1. Api", "{CA247358-94E4-4745-B9A8-B7D3A057714F}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Services", "2. Services", "{1DECC146-2B53-4B76-9D76-E518317A0D8E}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Event Handlers", "2. Event Handlers", "{1DECC146-2B53-4B76-9D76-E518317A0D8E}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. Test", "4. Test", "{489F645E-A636-4AC2-ABEC-08BF3FD77FF1}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Test", "3. Test", "{489F645E-A636-4AC2-ABEC-08BF3FD77FF1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Identity.api", "2. Services\1. Identity\1. Api\Identity.api.csproj", "{45A853FD-7D74-402B-B244-53433029DBAA}"
 EndProject
@@ -41,15 +41,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OKR.Common.Results", "OKR.C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. Exceptions", "4. Exceptions", "{951ADDF8-DD76-4023-ABB0-234B693865C5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApplicationErrorException", "ApplicationErrorException\ApplicationErrorException.csproj", "{7BF169D6-A1CE-4F75-ABDA-A626CA5FAC21}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApplicationErrorException", "ApplicationErrorException\ApplicationErrorException.csproj", "{7BF169D6-A1CE-4F75-ABDA-A626CA5FAC21}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Product.api", "2. Services\2. Product\Product.api\Product.api.csproj", "{1539B4C9-5227-41AF-B5D9-3DB455978338}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Product.api", "2. Services\2. Product\Product.api\Product.api.csproj", "{1539B4C9-5227-41AF-B5D9-3DB455978338}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Api", "1. Api", "{626CEB99-6209-4CCF-82A5-F0D7B46C5C1D}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Services", "2. Services", "{F9DF12EA-D7DA-44D6-BDD6-FDE54EFCC1E3}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Event Handlers", "2. Event Handlers", "{F9DF12EA-D7DA-44D6-BDD6-FDE54EFCC1E3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Services", "3. Services", "{805BCAC3-B955-467A-840D-20CA8807AE6C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Test", "3. Test", "{038F3A9B-F894-4D9E-8D37-D8C67A29159D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Product.Services.EventHandlers", "Product.Services.EventHandlers\Product.Services.EventHandlers.csproj", "{71875DC9-7349-4B0F-9DA8-10141D0AA087}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -93,6 +97,10 @@ Global
 		{1539B4C9-5227-41AF-B5D9-3DB455978338}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1539B4C9-5227-41AF-B5D9-3DB455978338}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1539B4C9-5227-41AF-B5D9-3DB455978338}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71875DC9-7349-4B0F-9DA8-10141D0AA087}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71875DC9-7349-4B0F-9DA8-10141D0AA087}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71875DC9-7349-4B0F-9DA8-10141D0AA087}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71875DC9-7349-4B0F-9DA8-10141D0AA087}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -119,6 +127,8 @@ Global
 		{626CEB99-6209-4CCF-82A5-F0D7B46C5C1D} = {9BEA5C8D-88FF-40C5-A8DE-F44EA5134FA5}
 		{F9DF12EA-D7DA-44D6-BDD6-FDE54EFCC1E3} = {9BEA5C8D-88FF-40C5-A8DE-F44EA5134FA5}
 		{805BCAC3-B955-467A-840D-20CA8807AE6C} = {A36DD189-C5E5-43F6-9C40-B55AAF472D5C}
+		{038F3A9B-F894-4D9E-8D37-D8C67A29159D} = {9BEA5C8D-88FF-40C5-A8DE-F44EA5134FA5}
+		{71875DC9-7349-4B0F-9DA8-10141D0AA087} = {F9DF12EA-D7DA-44D6-BDD6-FDE54EFCC1E3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {134D21C2-7228-41BF-AC15-E38D8F4FDABB}
