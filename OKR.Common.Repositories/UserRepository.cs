@@ -1,15 +1,15 @@
-﻿using Data;
-using OKR.Common.Domain;
+﻿using OKR.Common.Domain;
+using OKR.Common.Persistence.Database.IdentityDbContext;
 using OKR.Common.Repositories.Interfaces;
 
 namespace OKR.Common.Repositories
 {
     public class UserRepository : IUserRepository
     {
-        private readonly ApplicationDBContext _context;
+        private readonly IdentityDBContext _context;
 
 
-        public UserRepository(ApplicationDBContext context)
+        public UserRepository(IdentityDBContext context)
         {
             _context = context;
         }

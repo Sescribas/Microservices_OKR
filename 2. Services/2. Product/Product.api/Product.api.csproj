@@ -9,7 +9,13 @@
   <ItemGroup>
     <PackageReference Include="MediatR" Version="10.0.1" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.5.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -17,6 +23,7 @@
     <ProjectReference Include="..\..\..\Identity.Services\OKR.Common.Services.csproj" />
     <ProjectReference Include="..\..\..\OKR.Common.Repositories\OKR.Common.Repositories.csproj" />
     <ProjectReference Include="..\..\..\OKR.Common.Results\OKR.Common.Results.csproj" />
+    <ProjectReference Include="..\..\..\Product.Services.EventHandlers\Product.Services.EventHandlers.csproj" />
     <ProjectReference Include="..\..\1. Identity\4. Domain\Domain\OKR.Common.Domain.csproj" />
   </ItemGroup>
 

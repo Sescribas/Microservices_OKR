@@ -16,7 +16,5 @@
 
         public string Dni { get; set; }
 
-        public string EmailAddress { get; set; } = string.Empty;
-
     }
 }

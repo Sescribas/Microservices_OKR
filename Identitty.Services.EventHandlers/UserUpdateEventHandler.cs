@@ -62,7 +62,7 @@ namespace Identitty.Services.EventHandlers
 
         private void ValidateEmail(User request)
         {
-            var exist = _userService.VerifyEmail(request.Email.ToLower());
+            var exist = _userService.VerifyByUserName(request.Email.ToLower());
 
             if (!exist) return;
 

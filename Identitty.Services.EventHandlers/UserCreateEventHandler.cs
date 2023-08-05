@@ -55,7 +55,7 @@ namespace Identitty.Services.EventHandlers
 
         private void ValidateUserName(UserCreateCommand request)
         {
-            var exist = _userService.VerifyUserName(request.UserName.ToLower());
+            var exist = _userService.VerifyByUserName(request.UserName.ToLower());
             if (!exist) return;
 
             _logger.LogError("Username ya existente: {Request}", JsonSerializer.Serialize(request));
@@ -64,7 +64,7 @@ namespace Identitty.Services.EventHandlers
 
         private void ValidateEmail(UserCreateCommand request)
         {
-            var exist = _userService.VerifyEmail(request.Email.ToLower());
+            var exist = _userService.VerifyByEmail(request.Email.ToLower());
 
             if (!exist) return;
 

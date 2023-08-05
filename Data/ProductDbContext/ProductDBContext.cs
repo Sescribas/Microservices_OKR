@@ -1,25 +1,24 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OKR.Common.Domain;
 using OKR.Common.Persistence.Database.Configuration;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Data
+namespace OKR.Common.Persistence.Database.ProductDbContext
 {
-    public class ApplicationDBContext : DbContext
+    public class ProductDBContext : DbContext
     {
-        public ApplicationDBContext(DbContextOptions<ApplicationDBContext> options) : base(options) { }
+        public ProductDBContext(DbContextOptions<ProductDBContext> options) : base(options) { }
 
-        public DbSet<User> Users { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<ProductCategory> ProductCategories { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            ModelConfig(modelBuilder);
-        }
-
-        private static void ModelConfig(ModelBuilder modelBuilder)
-        {
-            _ = new UserConfiguration(modelBuilder.Entity<User>());
         }
 
         public override int SaveChanges()
@@ -27,4 +26,5 @@ namespace Data
             return base.SaveChanges();
         }
     }
+
 }

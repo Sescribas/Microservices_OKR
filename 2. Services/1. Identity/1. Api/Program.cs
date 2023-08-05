@@ -1,4 +1,3 @@
-using Data;
 using OKR.Common.Services.Interfaces;
 using OKR.Common.Services;
 using Microsoft.AspNetCore.Builder;
@@ -10,6 +9,7 @@ using Microsoft.AspNetCore.Hosting;
 using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 using MediatR;
+using OKR.Common.Persistence.Database.IdentityDbContext;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,7 +28,7 @@ IConfiguration configuration = new ConfigurationBuilder()
        .Build();
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<ApplicationDBContext>(x => x.UseSqlServer(connectionString));
+builder.Services.AddDbContext<IdentityDBContext>(x => x.UseSqlServer(connectionString));
 builder.Services.AddTransient<IUserRepository, UserRepository>();
 builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddMediatR(Assembly.Load("Identitty.Services.EventHandlers"));

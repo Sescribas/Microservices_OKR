@@ -1,5 +1,6 @@
-﻿using Data;
-using OKR.Common.Domain;
+﻿using OKR.Common.Domain;
+using OKR.Common.Persistence.Database.IdentityDbContext;
+using OKR.Common.Persistence.Database.ProductDbContext;
 using OKR.Common.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -11,10 +12,10 @@ namespace OKR.Common.Repositories
 {
     public class ProductRepository : IProductRepository
     {
-        private readonly ApplicationDBContext _context;
+        private readonly ProductDBContext _context;
 
 
-        public ProductRepository(ApplicationDBContext context)
+        public ProductRepository(ProductDBContext context)
         {
             _context = context;
         }

@@ -7,7 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Commands\" />
+    <PackageReference Include="MediatR" Version="10.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Identitty.Services.EventHandlers\Identitty.Services.EventHandlers.csproj" />
+    <ProjectReference Include="..\Identity.Services\OKR.Common.Services.csproj" />
+    <ProjectReference Include="..\OKR.Common.Results\OKR.Common.Results.csproj" />
   </ItemGroup>
 
 </Project>
