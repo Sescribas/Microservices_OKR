@@ -8,13 +8,16 @@ using System.Threading.Tasks;
 
 namespace OKR.Common.Persistence.Database.Configuration
 {
-    public class ProductCategoryConfiguration
+    public class CategoryConfiguration
     {
-        public ProductCategoryConfiguration(EntityTypeBuilder<Category> entityTypeBuilder)
+        public CategoryConfiguration(EntityTypeBuilder<Category> entityTypeBuilder)
         {
             entityTypeBuilder.HasIndex(x => x.Id);
             entityTypeBuilder.Property(x => x.Name);
             entityTypeBuilder.Property(x => x.Description);
+
+            entityTypeBuilder.HasMany(x => x.Products);
+
         }
     }
 }

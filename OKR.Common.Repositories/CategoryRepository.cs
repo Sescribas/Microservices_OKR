@@ -1,4 +1,5 @@
-﻿using OKR.Common.Domain;
+﻿using Microsoft.EntityFrameworkCore;
+using OKR.Common.Domain;
 using OKR.Common.Persistence.Database.ProductDbContext;
 using System;
 using System.Collections.Generic;
@@ -20,11 +21,11 @@ namespace OKR.Common.Repositories
 
         public List<Category> GetCategories()
         {
-            return _context.Categories.ToList();
+            return _context.Categories.Include(x => x.Products).ToList();
         }
         public Category? GetById(int id)
         {
-            return _context.Categories.FirstOrDefault(x => x.Id == id);
+            return _context.Categories.Include(x => x.Products).FirstOrDefault(x => x.Id == id);
         }
 
         public void Create(Category category)

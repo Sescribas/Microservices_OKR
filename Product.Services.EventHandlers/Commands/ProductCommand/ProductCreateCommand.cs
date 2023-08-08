@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Newtonsoft.Json;
 using OKR.Common.Results;
+using Product.Services.EventHandlers.Commands.ProductCategoryCommand;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,5 +27,9 @@ namespace Product.Services.EventHandlers.Commands.ProductCommand
 
         [JsonProperty("ExpirationDate")]
         public DateTime ExpirationDate { get; set; }
+
+        [JsonProperty("CategoryId")]
+
+        public int CategoryId { get; set; }
     }
 }

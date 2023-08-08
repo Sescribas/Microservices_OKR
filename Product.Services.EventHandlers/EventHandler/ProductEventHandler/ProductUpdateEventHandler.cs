@@ -3,6 +3,7 @@ using MediatR;
 using Microsoft.Extensions.Logging;
 using OKR.Common.Domain;
 using OKR.Common.Results;
+using OKR.Common.Services;
 using OKR.Common.Services.Interfaces;
 using Product.Services.EventHandlers.Commands.ProductCommand;
 using System;
@@ -11,17 +12,21 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using static ApplicationErrorException.ErrorDictionary;
 
 namespace Product.Services.EventHandlers.EventHandler.ProductEventHandler
 {
     public class ProductUpdateEventHandler : IRequestHandler<ProductUpdateCommand, BaseResult<string>>
     {
         private readonly IProductService _productService;
+        private readonly ICategoryService _categoryService;
+
         private readonly ILogger<ProductUpdateEventHandler> _logger;
 
-        public ProductUpdateEventHandler(IProductService productService, ILogger<ProductUpdateEventHandler> logger)
+        public ProductUpdateEventHandler(IProductService productService, ICategoryService categoryService, ILogger<ProductUpdateEventHandler> logger)
         {
             _productService = productService;
+            _categoryService = categoryService;
             _logger = logger;
         }
 
@@ -40,7 +45,18 @@ namespace Product.Services.EventHandlers.EventHandler.ProductEventHandler
                 product.FabricationDate = request.FabricationDate;
                 product.ExpirationDate = request.ExpirationDate;
 
+                var categoryPreviousId = product.Category.Id;
+
+                var category = _categoryService.GetById(request.CategoryId);
+
+                if (category is null)
+                    throw new ApplicationErrorExceptions("No existe una categoria con ese id.", (int)ErrorDictionary.GeneralCodes.UnexpectedError);
+
+                product.Category = category;
+
                 _productService.Update(product);
+
+                UpdatePreviousCategory(categoryPreviousId, product);
             }
             catch (ApplicationErrorExceptions ex)
             {
@@ -50,6 +66,28 @@ namespace Product.Services.EventHandlers.EventHandler.ProductEventHandler
 
             }
             return new BaseResult<string> { Success = true };
+        }
+
+        private void UpdatePreviousCategory(int categoryPreviousId, OKR.Common.Domain.Product product)
+        {
+            try
+            {
+                var categoryPrevious = _categoryService.GetById(categoryPreviousId);
+                
+                if (categoryPrevious is null)
+                    throw new ApplicationErrorExceptions("No existe una categoria con ese id.", (int)ErrorDictionary.GeneralCodes.UnexpectedError);
+
+                categoryPrevious.Products.Remove(product);
+
+                _categoryService.Update(categoryPrevious);
+            }
+            catch (ApplicationErrorExceptions ex)
+            {
+                _logger.LogError(ex.Message);
+
+                throw new ApplicationErrorExceptions("Hubo un error al actualizar la categoria anterior.", (int)ErrorDictionary.GeneralCodes.UnexpectedError);
+
+            }
         }
 
     }

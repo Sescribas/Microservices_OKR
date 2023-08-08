@@ -27,5 +27,9 @@ namespace Product.Services.EventHandlers.Commands.ProductCommand
 
         [JsonProperty("ExpirationDate")]
         public DateTime ExpirationDate { get; set; }
+
+        [JsonProperty("CategoryId")]
+
+        public int CategoryId { get; set; }
     }
 }

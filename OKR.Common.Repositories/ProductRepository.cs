@@ -1,4 +1,5 @@
-﻿using OKR.Common.Domain;
+﻿using Microsoft.EntityFrameworkCore;
+using OKR.Common.Domain;
 using OKR.Common.Persistence.Database.IdentityDbContext;
 using OKR.Common.Persistence.Database.ProductDbContext;
 using OKR.Common.Repositories.Interfaces;
@@ -22,11 +23,11 @@ namespace OKR.Common.Repositories
 
         public List<Product> GetProducts()
         {
-            return _context.Products.ToList();
+            return _context.Products.Include(x => x.Category).ToList();
         }
         public Product? GetById(int id)
         {
-            return _context.Products.FirstOrDefault(x => x.Id == id);
+            return _context.Products.Include(x => x.Category).FirstOrDefault(x => x.Id == id);
         }
 
         public void Create(Product product)

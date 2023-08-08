@@ -13,11 +13,14 @@ namespace Product.Services.EventHandlers.EventHandler.ProductEventHandler
     public class ProductCreateEventHandler : IRequestHandler<ProductCreateCommand, BaseResult<string>>
     {
         private readonly IProductService _productService;
+        private readonly ICategoryService _categoryService;
+
         private readonly ILogger<ProductCreateEventHandler> _logger;
 
-        public ProductCreateEventHandler(IProductService productService, ILogger<ProductCreateEventHandler> logger)
+        public ProductCreateEventHandler(IProductService productService, ICategoryService categoryService, ILogger<ProductCreateEventHandler> logger)
         {
             _productService = productService;
+            _categoryService = categoryService;
             _logger = logger;
         }
 
@@ -27,7 +30,19 @@ namespace Product.Services.EventHandlers.EventHandler.ProductEventHandler
             try
             {
                 var product = MapToProduct(request);
+
+                var category = _categoryService.GetById(request.CategoryId);
+
+                if (category is null)                
+                    throw new ApplicationErrorExceptions("No existe una categoria con ese id.", (int)ErrorDictionary.GeneralCodes.UnexpectedError);
+                
+                product.Category = category;
+
                 _productService.Create(product);
+
+                category.Products.Add(product);
+
+                _categoryService.Update(category);
 
             }
             catch (ApplicationErrorExceptions ex)

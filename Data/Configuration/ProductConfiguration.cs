@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using OKR.Common.Domain;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,9 @@ namespace OKR.Common.Persistence.Database.Configuration
             entityTypeBuilder.Property(x => x.Brand);
             entityTypeBuilder.Property(x => x.FabricationDate);
             entityTypeBuilder.Property(x => x.ExpirationDate);
-            entityTypeBuilder.Property(x => x.ProductCategory);
+            entityTypeBuilder.Property(x => x.Category);
+                             //.WithMany(c => c.Products)
+                             //.HasForeignKey(p => p.CategoryId);
         }
     }
 }

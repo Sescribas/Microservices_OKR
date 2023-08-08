@@ -19,6 +19,15 @@ namespace OKR.Common.Persistence.Database.ProductDbContext
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            ModelConfig(modelBuilder);
+        }
+
+        private static void ModelConfig(ModelBuilder modelBuilder)
+        {
+            _ = new UserConfiguration(modelBuilder.Entity<User>());
+            _ = new ProductConfiguration(modelBuilder.Entity<Product>());
+            _ = new CategoryConfiguration(modelBuilder.Entity<Category>());
+
         }
 
         public override int SaveChanges()
