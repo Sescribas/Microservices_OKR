@@ -3,15 +3,15 @@ using MediatR;
 using Microsoft.Extensions.Logging;
 using OKR.Common.Results;
 using OKR.Common.Services.Interfaces;
-using Product.Services.EventHandlers.Commands;
 using System.Text.Json;
 using OKR.Common.Domain;
 using System.Xml.Linq;
+using Product.Services.EventHandlers.Commands.ProductCommand;
 
-namespace Product.Services.EventHandlers
+namespace Product.Services.EventHandlers.EventHandler.ProductEventHandler
 {
     public class ProductCreateEventHandler : IRequestHandler<ProductCreateCommand, BaseResult<string>>
-    {         
+    {
         private readonly IProductService _productService;
         private readonly ILogger<ProductCreateEventHandler> _logger;
 

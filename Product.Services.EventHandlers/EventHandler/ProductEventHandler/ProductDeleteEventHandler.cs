@@ -11,10 +11,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Product.Services.EventHandlers.Commands;
 using System.Text.Json;
+using Product.Services.EventHandlers.Commands.ProductCommand;
 
-namespace Product.Services.EventHandlers
+namespace Product.Services.EventHandlers.EventHandler.ProductEventHandler
 {
     public class ProductDeleteEventHandler : IRequestHandler<ProductDeleteCommand, BaseResult<string>>
     {

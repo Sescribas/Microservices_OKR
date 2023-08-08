@@ -7,7 +7,7 @@ using OKR.Common.Domain;
 using OKR.Common.Services;
 using OKR.Common.Services.Interfaces;
 using Swashbuckle.AspNetCore.Annotations;
-using Product.Services.EventHandlers.Commands;
+using Product.Services.EventHandlers.Commands.ProductCommand;
 
 namespace Product.api.Controllers
 {

@@ -18,7 +18,9 @@ builder.Services.AddSwaggerGen();
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ProductDBContext>(x => x.UseSqlServer(connectionString));
 builder.Services.AddTransient<IProductRepository, ProductRepository>();
+builder.Services.AddTransient<ICategoryRepository, CategoryRepository>();
 builder.Services.AddTransient<IProductService, ProductService>();
+builder.Services.AddTransient<ICategoryService, CategoryService>();
 builder.Services.AddMediatR(Assembly.Load("Product.Services.EventHandlers"));
 var app = builder.Build();
 

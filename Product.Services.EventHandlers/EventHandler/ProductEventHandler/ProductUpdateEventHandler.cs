@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging;
 using OKR.Common.Domain;
 using OKR.Common.Results;
 using OKR.Common.Services.Interfaces;
-using Product.Services.EventHandlers.Commands;
+using Product.Services.EventHandlers.Commands.ProductCommand;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +12,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace Product.Services.EventHandlers
+namespace Product.Services.EventHandlers.EventHandler.ProductEventHandler
 {
     public class ProductUpdateEventHandler : IRequestHandler<ProductUpdateCommand, BaseResult<string>>
     {

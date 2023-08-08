@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Product.Services.EventHandlers.Commands
+namespace Product.Services.EventHandlers.Commands.ProductCategoryCommand
 {
-    public class ProductUpdateCommand : IRequest<BaseResult<string>>
+    public class CategoryUpdateCommand : IRequest<BaseResult<string>>
     {
         public int Id { get; set; }
 
@@ -18,14 +18,5 @@ namespace Product.Services.EventHandlers.Commands
 
         [JsonProperty("Description")]
         public string Description { get; set; }
-
-        [JsonProperty("Brand")]
-        public string Brand { get; set; }
-
-        [JsonProperty("FabricationDate")]
-        public DateTime FabricationDate { get; set; }
-
-        [JsonProperty("ExpirationDate")]
-        public DateTime ExpirationDate { get; set; }
     }
 }

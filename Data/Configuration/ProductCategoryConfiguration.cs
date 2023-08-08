@@ -10,7 +10,7 @@ namespace OKR.Common.Persistence.Database.Configuration
 {
     public class ProductCategoryConfiguration
     {
-        public ProductCategoryConfiguration(EntityTypeBuilder<ProductCategory> entityTypeBuilder)
+        public ProductCategoryConfiguration(EntityTypeBuilder<Category> entityTypeBuilder)
         {
             entityTypeBuilder.HasIndex(x => x.Id);
             entityTypeBuilder.Property(x => x.Name);
