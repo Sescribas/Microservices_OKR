@@ -11,12 +11,13 @@ namespace Product.Services.EventHandlers.Commands.ProductCategoryCommand
 {
     public class CategoryUpdateCommand : IRequest<BaseResult<string>>
     {
+        [JsonIgnore]
         public int Id { get; set; }
 
-        [JsonProperty("Name")]
+        [JsonProperty("name")]
         public string Name { get; set; }
 
-        [JsonProperty("Description")]
+        [JsonProperty("description")]
         public string Description { get; set; }
     }
 }

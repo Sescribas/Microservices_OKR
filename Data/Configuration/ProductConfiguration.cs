@@ -19,7 +19,7 @@ namespace OKR.Common.Persistence.Database.Configuration
             entityTypeBuilder.Property(x => x.Brand);
             entityTypeBuilder.Property(x => x.FabricationDate);
             entityTypeBuilder.Property(x => x.ExpirationDate);
-            entityTypeBuilder.Property(x => x.Category);
+            entityTypeBuilder.HasOne(x => x.Category);
                              //.WithMany(c => c.Products)
                              //.HasForeignKey(p => p.CategoryId);
         }

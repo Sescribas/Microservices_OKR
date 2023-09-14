@@ -6,6 +6,7 @@ namespace OKR.Common.Services.Interfaces
     {
         List<User> GetUsers();
         User? GetById(int id);
+        User? GetByUserName(string username);
         void Create(User user);
         void Update(User user);
         void Delete(User user);

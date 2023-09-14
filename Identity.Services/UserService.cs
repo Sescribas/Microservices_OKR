@@ -26,6 +26,12 @@ namespace OKR.Common.Services
             return user;
         }
 
+        public User? GetByUserName(string username)
+        {
+            var user = _userRepository.GetByUserName(username);
+            return user;
+        }
+
         public void Create(User user)
         {
            _userRepository.Create(user);

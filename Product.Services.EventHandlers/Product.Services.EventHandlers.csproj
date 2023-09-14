@@ -18,4 +18,8 @@
     <ProjectReference Include="..\OKR.Common.Results\OKR.Common.Results.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Commands\Queries\" />
+  </ItemGroup>
+
 </Project>

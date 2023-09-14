@@ -9,10 +9,12 @@ using Swashbuckle.AspNetCore.Annotations;
 using OKR.Common.api.Models.ViewModels;
 using MediatR;
 using Identitty.Services.EventHandlers.Commands;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace OKR.Common.api.Controllers
 {
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [ApiController]
     [Route("api/[controller]")]
     public class UserController : ControllerBase

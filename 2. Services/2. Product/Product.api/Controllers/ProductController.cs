@@ -8,6 +8,8 @@ using OKR.Common.Services;
 using OKR.Common.Services.Interfaces;
 using Swashbuckle.AspNetCore.Annotations;
 using Product.Services.EventHandlers.Commands.ProductCommand;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+using OKR.Common.Domain.Dto_s;
 
 namespace Product.api.Controllers
 {
@@ -26,11 +28,27 @@ namespace Product.api.Controllers
 
         [HttpGet("getall")]
         [Description("Obtiene un listado de productos.")]
-        public IEnumerable<OKR.Common.Domain.Product> Get()
+        public IEnumerable<GetAllProductsDtoResponse> Get()
         {
-            var users = _productService.GetProducts();
 
-            return users;
+            var product = _productService.GetProducts();
+
+            var response = MapProducts(product);
+            return response;
+        }
+
+        [HttpGet("get/{product_id}")]
+        [Description("Obtiene un listado de productos.")]
+        public IEnumerable<GetAllProductsDtoResponse> GetById([FromRoute(Name = "product_id")] int productId)
+        {
+
+            var product = _productService.GetById(productId);
+
+            if (product is null)
+                return null;
+
+            var response = MapProducts(new List<OKR.Common.Domain.Product> { product });
+            return response;
         }
 
         [HttpPost("create")]
@@ -64,6 +82,28 @@ namespace Product.api.Controllers
             var result = await _mediator.Send(new ProductDeleteCommand(productId));
 
             return result.Success ? Ok() : BadRequest(result);
+        }
+
+        private List<GetAllProductsDtoResponse> MapProducts(List<OKR.Common.Domain.Product> products)
+        {
+            List<GetAllProductsDtoResponse> result = new List<GetAllProductsDtoResponse>();
+            foreach (var product in products)
+            {
+                result.Add(new GetAllProductsDtoResponse
+                {
+                    Id = product.Id,
+                    Name = product.Name,
+                    Description = product.Description,
+                    Brand = product.Brand,
+                    ExpirationDate = product.ExpirationDate,
+                    FabricationDate = product.FabricationDate,
+                    CategoryId = product.CategoryId,
+                    NameCategory = product.Category.Name,
+                    DescriptionCategory = product.Category.Description
+
+                });
+            }
+            return result;
         }
 
     }

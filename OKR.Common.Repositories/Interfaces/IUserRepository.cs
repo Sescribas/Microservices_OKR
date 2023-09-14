@@ -9,5 +9,6 @@ namespace OKR.Common.Repositories.Interfaces
         void Create(User user);
         void Update(User user);
         void Delete(User user);
+        User? GetByUserName(string username);
     }
 }

@@ -11,6 +11,7 @@ namespace Product.Services.EventHandlers.Commands.ProductCommand
 {
     public class ProductUpdateCommand : IRequest<BaseResult<string>>
     {
+        [JsonIgnore]
         public int Id { get; set; }
 
         [JsonProperty("Name")]

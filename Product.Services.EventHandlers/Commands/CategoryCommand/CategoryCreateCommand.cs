@@ -11,11 +11,11 @@ namespace Product.Services.EventHandlers.Commands.ProductCategoryCommand
 {
     public class CategoryCreateCommand : IRequest<BaseResult<string>>
     {
-        [JsonProperty("Name")]
+        [JsonProperty("name")]
 
         public string Name { get; set; }
 
-        [JsonProperty("Name")]
+        [JsonProperty("description")]
 
         public string Description { get; set; }
     }

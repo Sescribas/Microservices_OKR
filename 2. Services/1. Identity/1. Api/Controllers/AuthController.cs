@@ -6,6 +6,13 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
+using Identitty.Services.EventHandlers;
+using OKR.Common.Services.Interfaces;
+using MediatR;
+using Identitty.Services.EventHandlers.Commands;
+using System.Collections;
+using System.Text;
+using System.Xml.Linq;
 
 namespace OKR.Common.api.Controllers
 {
@@ -14,43 +21,58 @@ namespace OKR.Common.api.Controllers
     public class AuthController : ControllerBase
     {
         private static UserModel User = new();
-        private readonly ILogger<UserModel> _logger;
         private readonly IConfiguration _configuration;
+        private readonly IMediator _mediator;
+        private readonly IUserService _userService;
 
-        public AuthController(IConfiguration configuration, ILogger<UserModel> logger) 
+        public AuthController(IConfiguration configuration, IMediator mediator, IUserService userService)
         {
-            _logger = logger;
             _configuration = configuration;
+            _mediator = mediator;
+            _userService = userService;
         }
 
         [HttpPost("register")]
         public async Task<ActionResult<UserModel>> Register(UserViewModel request) 
         {
-            _logger.LogInformation("Comienza la operacion de registracion.");
 
             CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passworSalt);
             User.UserName = request.UserName;
             User.PasswordHash = passwordHash;
             User.PasswordSalt = passworSalt;
 
-            _logger.LogInformation("Finaliza la operacion de registracion.");
+            var userCreate = MapToUserCreateCommand(User, request);
 
-            return Ok(User);
+            var result = await _mediator.Send(userCreate);
+
+            return Ok(result);
+        }
+
+        private UserCreateCommand MapToUserCreateCommand(UserModel user, UserViewModel request)
+        {
+            return new UserCreateCommand()
+            {
+                UserName = user.UserName,
+                Password = Encoding.UTF8.GetString(user.PasswordHash),
+                Name = request.Name,
+                LastName = request.LastName,
+                Dni = request.Dni,
+                Email = request.Email
+            };
         }
 
         [HttpPost("login")]
         public async Task<ActionResult<string>> Login(UserViewModel request)
         {
-            if(User.UserName != request.UserName)
-            {
-                return BadRequest("El nombre de usuario es incorrecto.");
-            }
+            var user = _userService.GetByUserName(request.UserName);
 
-            if (!VerifyPassword(request.Password, User.PasswordHash, User.PasswordSalt))
-            {
+            if (user == null)            
+                return BadRequest("Username Inexistente.");       
+
+            if (!VerifyPassword(request.Password, User.PasswordHash, User.PasswordSalt))            
                 return BadRequest("La contraseña es incorrecta.");
 
-            }
+            
 
             string token = CreateToken(User);
 
@@ -76,15 +98,12 @@ namespace OKR.Common.api.Controllers
 
         private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passworSalt)
         {
-            _logger.LogInformation("Comienza la operacion de hasheo.");
 
             using (var hmac = new HMACSHA512())
             {
                 passworSalt = hmac.Key;
                 passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
             }
-            _logger.LogInformation("Finaliza la operacion de hasheo.");
-
         }
 
         private bool VerifyPassword(string password, byte[] passwordHash, byte[] passworSalt)

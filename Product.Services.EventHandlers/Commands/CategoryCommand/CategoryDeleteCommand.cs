@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Newtonsoft.Json;
 using OKR.Common.Results;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,8 @@ namespace Product.Services.EventHandlers.Commands.ProductCategoryCommand
         {
             Id = categoryId;
         }
+
+        [JsonIgnore]
         public int Id { get; set; }
 
     }

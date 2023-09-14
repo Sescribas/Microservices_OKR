@@ -10,6 +10,7 @@ using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 using MediatR;
 using OKR.Common.Persistence.Database.IdentityDbContext;
+using HealthChecks.UI.Client;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,9 +33,12 @@ builder.Services.AddDbContext<IdentityDBContext>(x => x.UseSqlServer(connectionS
 builder.Services.AddTransient<IUserRepository, UserRepository>();
 builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddMediatR(Assembly.Load("Identitty.Services.EventHandlers"));
+builder.Services.AddHealthChecks();
+
+ThreadPool.SetMinThreads(10, 10);
+ThreadPool.SetMaxThreads(100, 100);
 
 var app = builder.Build();
-
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -45,7 +49,10 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+app.UseAuthentication();
 
 app.MapControllers();
+app.MapHealthChecks("/health");
+
 
 app.Run();

@@ -40,5 +40,10 @@ namespace OKR.Common.Repositories
             _context.Users.Remove(user);
             _context.SaveChanges();
         }
+
+        public User? GetByUserName(string username)
+        {
+            return _context.Users.FirstOrDefault(x => x.UserName == username);
+        }
     }
 }
