@@ -32,6 +32,7 @@ namespace OKR.Common.api.Controllers
         [Description("Obtiene un listado de usuarios.")]
         public IEnumerable<User> Get()
         {
+            //Agregar el queryEventHandler.
             var users = _userService.GetUsers();
             
             return users;

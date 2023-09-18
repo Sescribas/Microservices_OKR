@@ -13,6 +13,8 @@ using Identitty.Services.EventHandlers.Commands;
 using System.Collections;
 using System.Text;
 using System.Xml.Linq;
+using Identity.api.Models.ViewModels;
+using AutoMapper;
 
 namespace OKR.Common.api.Controllers
 {
@@ -24,45 +26,35 @@ namespace OKR.Common.api.Controllers
         private readonly IConfiguration _configuration;
         private readonly IMediator _mediator;
         private readonly IUserService _userService;
+        private readonly IMapper _mapper;
 
-        public AuthController(IConfiguration configuration, IMediator mediator, IUserService userService)
+        public AuthController(IConfiguration configuration,IMapper mapper, IMediator mediator, IUserService userService)
         {
             _configuration = configuration;
+            _mapper = mapper;
             _mediator = mediator;
             _userService = userService;
         }
 
         [HttpPost("register")]
-        public async Task<ActionResult<UserModel>> Register(UserViewModel request) 
+        public async Task<ActionResult<UserModel>> Register(UserRegisterViewModel request) 
         {
 
             CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passworSalt);
-            User.UserName = request.UserName;
             User.PasswordHash = passwordHash;
             User.PasswordSalt = passworSalt;
 
-            var userCreate = MapToUserCreateCommand(User, request);
+            var userCreate = _mapper.Map<UserCreateCommand>(request);
+            userCreate.Password = Encoding.UTF8.GetString(User.PasswordHash);
 
             var result = await _mediator.Send(userCreate);
 
             return Ok(result);
         }
 
-        private UserCreateCommand MapToUserCreateCommand(UserModel user, UserViewModel request)
-        {
-            return new UserCreateCommand()
-            {
-                UserName = user.UserName,
-                Password = Encoding.UTF8.GetString(user.PasswordHash),
-                Name = request.Name,
-                LastName = request.LastName,
-                Dni = request.Dni,
-                Email = request.Email
-            };
-        }
 
         [HttpPost("login")]
-        public async Task<ActionResult<string>> Login(UserViewModel request)
+        public async Task<ActionResult<string>> Login(UserLoginViewModel request)
         {
             var user = _userService.GetByUserName(request.UserName);
 

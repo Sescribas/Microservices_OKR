@@ -7,11 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <Compile Remove="Dtos\CategoryDto\**" />
+    <EmbeddedResource Remove="Dtos\CategoryDto\**" />
+    <None Remove="Dtos\CategoryDto\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Dto%27s\CategoryDto\" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
 </Project>
