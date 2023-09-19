@@ -15,6 +15,7 @@ namespace OKR.Common.Persistence.Database.ProductDbContext
 
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<ProductStock> ProductStocks { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -27,6 +28,7 @@ namespace OKR.Common.Persistence.Database.ProductDbContext
             _ = new UserConfiguration(modelBuilder.Entity<User>());
             _ = new ProductConfiguration(modelBuilder.Entity<Product>());
             _ = new CategoryConfiguration(modelBuilder.Entity<Category>());
+            _ = new ProductStockConfiguration(modelBuilder.Entity<ProductStock>());
 
         }
 

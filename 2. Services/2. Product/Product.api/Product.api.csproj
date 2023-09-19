@@ -27,4 +27,8 @@
     <ProjectReference Include="..\..\1. Identity\4. Domain\Domain\OKR.Common.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Automapper\" />
+  </ItemGroup>
+
 </Project>

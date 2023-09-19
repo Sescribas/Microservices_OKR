@@ -17,6 +17,7 @@ namespace OKR.Common.Domain
         public DateTime FabricationDate { get; set; }
         public DateTime ExpirationDate  { get; set; }
         public Category Category { get; set; }
+        public ProductStock ProductStock { get; set; }
 
         //SellProduct
         //id, idproducto, stock, price

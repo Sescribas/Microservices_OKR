@@ -30,6 +30,11 @@ namespace OKR.Common.Repositories
             return _context.Products.Include(x => x.Category).FirstOrDefault(x => x.Id == id);
         }
 
+        public List<Product> GetByCategoryId(int categoryId)
+        {
+            return _context.Products.Include(x => x.Category).Where(x => x.CategoryId == categoryId).ToList();
+        }
+
         public void Create(Product product)
         {
             _context.Products.AddAsync(product);

@@ -8,6 +8,7 @@ namespace OKR.Common.Services.Interfaces
         void Delete(Product product);
         Product? GetById(int id);
         List<Product> GetProducts();
+        List<Product> GetProductsByCategoryId(int id);
         void Update(Product product);
     }
 }

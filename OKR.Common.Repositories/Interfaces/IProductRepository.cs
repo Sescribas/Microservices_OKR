@@ -8,6 +8,7 @@ namespace OKR.Common.Repositories.Interfaces
         void Delete(Product product);
         Product? GetById(int id);
         List<Product> GetProducts();
+        List<Product> GetByCategoryId(int categoryId);
         void Update(Product product);
     }
 }

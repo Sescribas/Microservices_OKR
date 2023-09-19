@@ -20,7 +20,7 @@ namespace Product.api.Controllers
         private readonly IMediator _mediator;
         private readonly IProductService _productService;
 
-        public ProductController( IMediator mediator, IProductService productService)
+        public ProductController( IMediator mediator,IProductService productService)
         {
             _mediator = mediator;
             _productService = productService;
@@ -51,6 +51,20 @@ namespace Product.api.Controllers
             return response;
         }
 
+        [HttpGet("get/category/{category_id}")]
+        [Description("Obtiene un listado de productos.")]
+        public IEnumerable<GetAllProductsDtoResponse> GetByCategoryId([FromRoute(Name = "category_id")] int categoryId)
+        {
+
+            var products = _productService.GetProductsByCategoryId(categoryId);
+
+            if (products is null)
+                return null;
+
+            var response = MapProducts(products);
+            return response;
+        }
+
         [HttpPost("create")]
         [SwaggerOperation(Summary = "Se crea un producto.", Tags = new[] { "Product" })]
         [ProducesResponseType(typeof(ProductCreateCommand), StatusCodes.Status201Created)]
@@ -63,7 +77,7 @@ namespace Product.api.Controllers
         }
 
         [HttpPut("update/{product_id}")]
-        [SwaggerOperation(Summary = "Se modifica un usuario.", Tags = new[] { "User" })]
+        [SwaggerOperation(Summary = "Se modifica un producto.", Tags = new[] { "Product" })]
         [ProducesResponseType(typeof(ProductUpdateCommand), StatusCodes.Status201Created)]
         [Produces(MediaTypeNames.Application.Json, "application/problem+json")]
         public async Task<IActionResult> Update([FromBody] ProductUpdateCommand command, [FromRoute(Name = "product_id")] int productId)
@@ -75,7 +89,7 @@ namespace Product.api.Controllers
         }
 
         [HttpDelete("delete/{product_id}")]
-        [SwaggerOperation(Summary = "Se elimina un usuario.", Tags = new[] { "User" })]
+        [SwaggerOperation(Summary = "Se elimina un producto.", Tags = new[] { "Product" })]
         [Produces(MediaTypeNames.Application.Json, "application/problem+json")]
         public async Task<IActionResult> Delete([FromRoute(Name = "product_id")] int productId)
         {

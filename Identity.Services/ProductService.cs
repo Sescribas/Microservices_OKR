@@ -24,6 +24,12 @@ namespace OKR.Common.Services
             return products;
         }
 
+        public List<Product> GetProductsByCategoryId(int id)
+        {
+            var products = _productRepository.GetByCategoryId(id);
+            return products;
+        }
+
         public Product? GetById(int id)
         {
             var product = _productRepository.GetById(id);
