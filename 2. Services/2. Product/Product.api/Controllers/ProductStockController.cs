@@ -29,7 +29,7 @@ namespace Product.api.Controllers
 
         [HttpGet("getall")]
         [Description("Obtiene un listado de productos stock.")]
-        public async Task<List<GetAllProductStockDtoResponse>> Get()
+        public async Task<List<GetProductStockDtoResponse>> Get()
         {
             var response = await _mediator.Send(new GetAllProductStockQuery());
 
@@ -38,16 +38,11 @@ namespace Product.api.Controllers
 
         [HttpGet("get/{product_id}")]
         [Description("Obtiene un listado de productos stock.")]
-        public IEnumerable<GetAllProductStockDtoResponse> GetById([FromRoute(Name = "product_id")] int productId)
+        public async Task<IActionResult> GetById([FromRoute(Name = "product_id")] int productId)
         {
+            var response = await _mediator.Send(new GetByIdProductStockQuery(productId));
 
-            var product = _productStockService.GetById(productId);
-
-            if (product is null)
-                return null;
-
-            var response = MapProducts(new List<OKR.Common.Domain.ProductStock> { product });
-            return response;
+            return Ok(response);
         }
       
         [HttpPost("create")]
@@ -73,22 +68,22 @@ namespace Product.api.Controllers
             return result.Success ? Ok() : BadRequest(result);
         }
 
-        [HttpDelete("delete/{productStock_id}")]
-        [SwaggerOperation(Summary = "Se elimina un producto stock.", Tags = new[] { "ProductStock" })]
-        [Produces(MediaTypeNames.Application.Json, "application/problem+json")]
-        public async Task<IActionResult> Delete([FromRoute(Name = "productStock_id")] int productId)
-        {
-            var result = await _mediator.Send(new ProductStockDeleteCommand(productId));
+        //[HttpDelete("delete/{productStock_id}")]
+        //[SwaggerOperation(Summary = "Se elimina un producto stock.", Tags = new[] { "ProductStock" })]
+        //[Produces(MediaTypeNames.Application.Json, "application/problem+json")]
+        //public async Task<IActionResult> Delete([FromRoute(Name = "productStock_id")] int productId)
+        //{
+        //    var result = await _mediator.Send(new ProductStockDeleteCommand(productId));
 
-            return result.Success ? Ok() : BadRequest(result);
-        }
+        //    return result.Success ? Ok() : BadRequest(result);
+        //}
 
-        private List<GetAllProductStockDtoResponse> MapProducts(List<OKR.Common.Domain.ProductStock> products)
+        private List<GetProductStockDtoResponse> MapProducts(List<OKR.Common.Domain.ProductStock> products)
         {
-            List<GetAllProductStockDtoResponse> result = new List<GetAllProductStockDtoResponse>();
+            List<GetProductStockDtoResponse> result = new List<GetProductStockDtoResponse>();
             foreach (var product in products)
             {
-                result.Add(new GetAllProductStockDtoResponse
+                result.Add(new GetProductStockDtoResponse
                 {
                     Id = product.Id,
                     ProductId = product.ProductId,

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OKR.Common.Domain.Dtos.ProductStockDto
 {
-    public class GetAllProductStockDtoResponse
+    public class GetProductStockDtoResponse
     {
         [JsonProperty("id")]
         public int Id { get; set; }

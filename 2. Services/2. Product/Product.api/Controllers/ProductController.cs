@@ -28,7 +28,7 @@ namespace Product.api.Controllers
 
         [HttpGet("getall")]
         [Description("Obtiene un listado de productos.")]
-        public IEnumerable<GetAllProductsDtoResponse> Get()
+        public IEnumerable<GetProductsDtoResponse> Get()
         {
 
             var product = _productService.GetProducts();
@@ -39,7 +39,7 @@ namespace Product.api.Controllers
 
         [HttpGet("get/{product_id}")]
         [Description("Obtiene un listado de productos.")]
-        public IEnumerable<GetAllProductsDtoResponse> GetById([FromRoute(Name = "product_id")] int productId)
+        public IEnumerable<GetProductsDtoResponse> GetById([FromRoute(Name = "product_id")] int productId)
         {
 
             var product = _productService.GetById(productId);
@@ -53,7 +53,7 @@ namespace Product.api.Controllers
 
         [HttpGet("get/category/{category_id}")]
         [Description("Obtiene un listado de productos.")]
-        public IEnumerable<GetAllProductsDtoResponse> GetByCategoryId([FromRoute(Name = "category_id")] int categoryId)
+        public IEnumerable<GetProductsDtoResponse> GetByCategoryId([FromRoute(Name = "category_id")] int categoryId)
         {
 
             var products = _productService.GetProductsByCategoryId(categoryId);
@@ -98,12 +98,12 @@ namespace Product.api.Controllers
             return result.Success ? Ok() : BadRequest(result);
         }
 
-        private List<GetAllProductsDtoResponse> MapProducts(List<OKR.Common.Domain.Product> products)
+        private List<GetProductsDtoResponse> MapProducts(List<OKR.Common.Domain.Product> products)
         {
-            List<GetAllProductsDtoResponse> result = new List<GetAllProductsDtoResponse>();
+            List<GetProductsDtoResponse> result = new List<GetProductsDtoResponse>();
             foreach (var product in products)
             {
-                result.Add(new GetAllProductsDtoResponse
+                result.Add(new GetProductsDtoResponse
                 {
                     Id = product.Id,
                     Name = product.Name,
