@@ -19,16 +19,5 @@ namespace OKR.Common.Domain
         public Category Category { get; set; }
         public ProductStock ProductStock { get; set; }
 
-        //SellProduct
-        //id, idproducto, stock, price
-
-        //SellProductDetail
-        //id, idSell, idProducto, amount, SellDate 
-        // double Price { get; set; }
-        //public int Stock { get; set; }
-
-        //sell
-        //
-
     }
 }
