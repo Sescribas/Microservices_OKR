@@ -7,9 +7,18 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Commands\" />
     <Folder Include="EventHandler\" />
-    <Folder Include="Queries\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="10.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\2. Services\1. Identity\4. Domain\Domain\OKR.Common.Domain.csproj" />
+    <ProjectReference Include="..\ApplicationErrorException\ApplicationErrorException.csproj" />
+    <ProjectReference Include="..\Identity.Services\OKR.Common.Services.csproj" />
+    <ProjectReference Include="..\OKR.Common.Results\OKR.Common.Results.csproj" />
   </ItemGroup>
 
 </Project>

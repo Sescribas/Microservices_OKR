@@ -1,7 +1,10 @@
+using MediatR;
 using MongoDB.Driver;
+using OKR.Common.Domain.Automapper;
 using OKR.Common.Persistence.Database.SellDbContext;
 using OKR.Common.Repositories;
 using OKR.Common.Repositories.Interfaces;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,7 +21,8 @@ var databaseName = "Inventory";
 builder.Services.AddSingleton<IMongoClient>(provider => new MongoClient(connectionString));
 builder.Services.AddSingleton(provider => provider.GetRequiredService<IMongoClient>().GetDatabase(databaseName));
 builder.Services.AddTransient<ISellCollection, SellCollection>();
-
+builder.Services.AddMediatR(Assembly.Load("Inventory.Services.EventHandler"));
+builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(SellProfile)));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

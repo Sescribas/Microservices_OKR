@@ -7,11 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MediatR" Version="10.0.1" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.5.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Data\OKR.Common.Persistence.Database.csproj" />
+    <ProjectReference Include="..\Inventory.Services.EventHandler\Inventory.Services.EventHandler.csproj" />
     <ProjectReference Include="..\OKR.Common.Repositories\OKR.Common.Repositories.csproj" />
   </ItemGroup>
 

@@ -9,6 +9,7 @@ using OKR.Common.Persistence.Database.ProductDbContext;
 using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Hosting;
 using AutoMapper;
+using OKR.Common.Domain.Automapper;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,7 +29,8 @@ builder.Services.AddTransient<IProductStockRepository, ProductStockRepository>()
 builder.Services.AddTransient<IProductService, ProductService>();
 builder.Services.AddTransient<ICategoryService, CategoryService>();
 builder.Services.AddTransient<IProductStockService, ProductStockService>();
-builder.Services.AddAutoMapper(typeof(Program));
+builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(ProductProfile)));
+builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(ProductStockProfile)));
 
 builder.Services.AddMediatR(Assembly.Load("Product.Services.EventHandlers"));
 var app = builder.Build();
