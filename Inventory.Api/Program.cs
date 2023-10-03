@@ -1,5 +1,7 @@
 using MediatR;
 using MongoDB.Driver;
+using OKR.Common.Configuration.Configurations.IdentityApi;
+using OKR.Common.Configuration.Configurations.ProductApi;
 using OKR.Common.Domain.Automapper;
 using OKR.Common.Persistence.Database.SellDbContext;
 using OKR.Common.Repositories;
@@ -21,6 +23,14 @@ var databaseName = "Inventory";
 builder.Services.AddSingleton<IMongoClient>(provider => new MongoClient(connectionString));
 builder.Services.AddSingleton(provider => provider.GetRequiredService<IMongoClient>().GetDatabase(databaseName));
 builder.Services.AddTransient<ISellCollection, SellCollection>();
+
+#region IOptions
+
+builder.Services.Configure<IdentityApiConfigurationsOptions>(builder.Configuration.GetSection("IdentityApi"));
+builder.Services.Configure<ProductApiConfigurationsOptions>(builder.Configuration.GetSection("ProductApi"));
+
+#endregion
+
 builder.Services.AddMediatR(Assembly.Load("Inventory.Services.EventHandler"));
 builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(SellProfile)));
 var app = builder.Build();

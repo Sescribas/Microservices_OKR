@@ -16,6 +16,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Data\OKR.Common.Persistence.Database.csproj" />
     <ProjectReference Include="..\Inventory.Services.EventHandler\Inventory.Services.EventHandler.csproj" />
+    <ProjectReference Include="..\OKR.Common.Configuration\OKR.Common.Configuration.csproj" />
     <ProjectReference Include="..\OKR.Common.Repositories\OKR.Common.Repositories.csproj" />
   </ItemGroup>
 

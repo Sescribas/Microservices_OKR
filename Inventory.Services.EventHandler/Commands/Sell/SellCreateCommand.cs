@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Inventory.Services.EventHandler.Commands
+namespace Inventory.Services.EventHandler.Commands.Sell
 {
     public class SellCreateCommand : IRequest<BaseResult<string>>
     {
