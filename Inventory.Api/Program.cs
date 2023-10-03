@@ -24,6 +24,11 @@ builder.Services.AddSingleton<IMongoClient>(provider => new MongoClient(connecti
 builder.Services.AddSingleton(provider => provider.GetRequiredService<IMongoClient>().GetDatabase(databaseName));
 builder.Services.AddTransient<ISellCollection, SellCollection>();
 
+builder.Services.AddTransient<IProductRepository, ProductRepository>();
+builder.Services.AddTransient<ICategoryRepository, CategoryRepository>();
+builder.Services.AddTransient<IProductStockRepository, ProductStockRepository>();
+builder.Services.AddTransient<IUserRepository, UserRepository>();
+
 #region IOptions
 
 builder.Services.Configure<IdentityApiConfigurationsOptions>(builder.Configuration.GetSection("IdentityApi"));
